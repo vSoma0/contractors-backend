@@ -2,8 +2,11 @@ import os
 from fastapi import Depends, HTTPException
 from fastapi.security import APIKeyHeader
 from starlette.status import HTTP_403_FORBIDDEN
+from dotenv import load_dotenv
 
-api_key_header = APIKeyHeader(name='Authorization', auto_error = False)
+load_dotenv()
+
+api_key_header = APIKeyHeader(name='Authorization', auto_error = True)
 TOKEN = os.getenv('TOKEN')
 
 def get_api_key(api_key: str = Depends(api_key_header)):
